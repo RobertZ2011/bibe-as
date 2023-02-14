@@ -42,7 +42,8 @@ impl Emitter {
 	pub fn emit(&mut self, statements: &StatementStream) {
 		for statement in statements {
 			match statement {
-				Statement::Instruction(i) => self.emit_instruction(i)
+				Statement::Instruction(i) => self.emit_instruction(i),
+				_ => unreachable!()
 			}
 		}
 	}
