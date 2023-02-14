@@ -1,5 +1,13 @@
-mov r1, 2
-mov r2, 3
-add r3, r1, r2
-cmp r0, r3, 5
-mov.eq r4, 1
+mov r1, 128
+mov r2, 255
+strw [r1, r0], r2
+ldrw r3, [r1, r0]
+shl r2, r2, 8
+strw [r1, r0], r2
+ldrw r4, [r1, r0]
+shl r2, r2, 8
+strw [r1, r0], r2
+ldrw r5, [r1, r0]
+shl r2, r2, 8
+strw [r1, r0], r2
+ldrw r6, [r1, r0]
