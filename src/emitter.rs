@@ -44,7 +44,6 @@ impl Emitter {
 		for statement in statements {
 			match statement {
 				Statement::Instruction(i) => self.emit_instruction(i),
-				_ => unreachable!()
 			}
 		}
 	}

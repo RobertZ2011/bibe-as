@@ -42,5 +42,5 @@ fn main() {
 		emitter.emit(&statements);
 	}
 
-	emitter.write(&mut output);
+	emitter.write(&mut output).unwrap();
 }
