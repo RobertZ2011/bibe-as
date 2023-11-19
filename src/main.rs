@@ -1,7 +1,7 @@
 /* Copyright 2023 Robert Zieba, see LICENSE file for full license. */
 use bibe_asm::parser::{
 	parse,
-	tokenize, Statement,
+	tokenize,
 };
 use clap::{ Arg, Command };
 use std::fs::{
@@ -15,6 +15,7 @@ use simplelog::{
 };
 
 mod emitter;
+mod state;
 
 fn main() {
 	let matches = Command::new("as")
@@ -35,33 +36,27 @@ fn main() {
 	WriteLogger::init(LevelFilter::Debug, LogConfig::default(), log_file).expect("Failed to init logger");
 
 	let inputs = matches.get_many::<String>("input").unwrap();
-	let mut output = File::create(matches.get_one::<String>("out").unwrap()).expect("Failed to open output file");
+	let output = File::create(matches.get_one::<String>("out").unwrap()).expect("Failed to open output file");
 	let format = matches.get_one::<String>("format").unwrap();
-	let format = match &format[..] {
-		"ann" => emitter::Kind::Annotated,
-		"img" => emitter::Kind::Image,
-		_ => panic!("Unsupported output format"),
-	};
+	let mut e = emitter::create(&format, output).unwrap();
 
-	let mut origin = 0u32;
 	for input in inputs {
 		let contents = read_to_string(input).expect("Failed to read file"); 
 
 		let (_, tokens) = tokenize(&contents).unwrap();
 		let (_, statements) = parse(&tokens).unwrap();
 
+		let mut state = state::State::new();
 		for statement in &statements {
-			if origin & 0x3 != 0 {
-				// Align the address
-				origin = origin + 3 & 0xfffffff3;
-			}
+			state.insert_statement(statement);
+		}
 
-			match statement {
-				Statement::Instruction(instruction) => {
-					emitter::emit_instruction(format, &mut output, origin, instruction);
-					origin += 4;
-				}
-			}
+		println!("{:?}", state.symbols);
+		bibe_asm::parser::string_table::dump();
+
+		let res = e.emit(&state);
+		if res.is_err() {
+			panic!("{:?}", res);
 		}
 	}
 }
