@@ -30,7 +30,7 @@ fn main() {
 		.arg(Arg::new("format")
 			.short('f')
 			.long("format")
-			.default_value("img")
+			.default_value("bin")
 		)
 		.get_matches();
 
