@@ -14,8 +14,10 @@ use simplelog::{
 	WriteLogger,
 };
 
-mod emitter;
-mod state;
+use bibe_asm::asm::{
+	emitter,
+	object,
+};
 
 fn main() {
 	let matches = Command::new("as")
@@ -46,15 +48,15 @@ fn main() {
 		let (_, tokens) = tokenize(&contents).unwrap();
 		let (_, statements) = parse(&tokens).unwrap();
 
-		let mut state = state::State::new();
+		let mut object = object::Object::new();
 		for statement in &statements {
-			state.insert_statement(statement);
+			object.insert_statement(statement);
 		}
 
-		println!("{:?}", state.symbols);
+		println!("{:?}", object.symbols);
 		bibe_asm::parser::string_table::dump();
 
-		let res = e.emit(&state);
+		let res = e.emit(&object);
 		if res.is_err() {
 			panic!("{:?}", res);
 		}
