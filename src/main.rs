@@ -40,7 +40,7 @@ fn main() {
 	let inputs = matches.get_many::<String>("input").unwrap();
 	let output = File::create(matches.get_one::<String>("out").unwrap()).expect("Failed to open output file");
 	let format = matches.get_one::<String>("format").unwrap();
-	let mut e = emitter::create(&format, output).unwrap();
+	let mut e = emitter::create(&format, Box::new(output)).unwrap();
 
 	for input in inputs {
 		let contents = read_to_string(input).expect("Failed to read file"); 
@@ -52,9 +52,6 @@ fn main() {
 		for statement in &statements {
 			object.insert_statement(statement);
 		}
-
-		println!("{:?}", object.symbols);
-		bibe_asm::parser::string_table::dump();
 
 		let res = e.emit(&object);
 		if res.is_err() {

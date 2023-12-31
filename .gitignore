@@ -2,4 +2,5 @@
 Cargo.lock
 *.bin
 *.txt
+*.hex
 .DS_Store
