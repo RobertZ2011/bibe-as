@@ -1,7 +1,4 @@
-.origin 0
 	mov r1, 5
-	mov r8, 0
-	mov r9, 0
 	mov r10, 1
 loop:
 	cmp r0, r8, r1
@@ -13,3 +10,6 @@ loop:
 	j loop
 end:
 	mov r1, r11
+	csww 384, r1
+	mov r1, 10
+	csww 320, r1
