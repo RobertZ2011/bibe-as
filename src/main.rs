@@ -1,7 +1,7 @@
 /* Copyright 2023 Robert Zieba, see LICENSE file for full license. */
 use bibe_asm::parser::{
 	parse,
-	tokenize,
+	tokenize, string_table,
 };
 use clap::{ Arg, Command };
 use std::fs::{
@@ -46,16 +46,21 @@ fn main() {
 		let contents = read_to_string(input).expect("Failed to read file"); 
 
 		let (_, tokens) = tokenize(&contents).unwrap();
-		let (_, statements) = parse(&tokens).unwrap();
+		let (tokens, statements) = parse(&tokens).unwrap();
 
 		let mut object = object::Object::new();
 		for statement in &statements {
+			log::debug!("{statement:?}");
 			object.insert_statement(statement);
 		}
 
 		let res = e.emit(&object);
-		if res.is_err() {
-			panic!("{:?}", res);
+		if let Err(err) = res{
+			log::debug!("{:?}", tokens);
+			match err {
+				emitter::Error::UndefinedSymbol(id) => println!("Undefined symbol {}", string_table::lookup(id).unwrap()),
+				_ => println!("{:?}", err),
+			}
 		}
 	}
 }
