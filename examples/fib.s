@@ -1,7 +1,7 @@
-	mov r1, 5
+	mov r1, 4
 	mov r10, 1
 loop:
-	cmp r0, r8, r1
+	cmp r8, r1
 	j.ge end
 	add r11, r9, r10
 	mov r9, r10
