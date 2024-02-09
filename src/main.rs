@@ -59,7 +59,6 @@ fn main() {
 			log::debug!("{:?}", tokens);
 			match err {
 				emitter::Error::UndefinedSymbol(id) => println!("Undefined symbol {}", string_table::lookup(id).unwrap()),
-				_ => println!("{:?}", err),
 			}
 		}
 	}

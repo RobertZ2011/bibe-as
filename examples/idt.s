@@ -1,6 +1,6 @@
 .origin 0
 reset:
-	j start
+	b start
 nmi:
 	div r0, r0, r0
 breakpoint:
@@ -96,4 +96,4 @@ irq30:
 irq31:
 	div r0, r0, r0
 start:
-	j start
+	b start
