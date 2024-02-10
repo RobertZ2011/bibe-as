@@ -1,1 +1,1 @@
-div r0, r0, r0
+div %z, %z, %z

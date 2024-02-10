@@ -2,98 +2,98 @@
 reset:
 	b start
 nmi:
-	div r0, r0, r0
+	div %z, %z, %z
 breakpoint:
-	div r0, r0, r0
+	div %z, %z, %z
 alignfault:
-	div r0, r0, r0
+	div %z, %z, %z
 memfault:
-	div r0, r0, r0
+	div %z, %z, %z
 opcodefault:
-	div r0, r0, r0
+	div %z, %z, %z
 doublefault:
-	div r0, r0, r0
+	div %z, %z, %z
 swi:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved0:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved1:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved2:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved3:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved4:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved5:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved6:
-	div r0, r0, r0
+	div %z, %z, %z
 reserved7:
-	div r0, r0, r0
+	div %z, %z, %z
 irq0:
-	div r0, r0, r0
+	div %z, %z, %z
 irq1:
-	div r0, r0, r0
+	div %z, %z, %z
 irq2:
-	div r0, r0, r0
+	div %z, %z, %z
 irq3:
-	div r0, r0, r0
+	div %z, %z, %z
 irq4:
-	div r0, r0, r0
+	div %z, %z, %z
 irq5:
-	div r0, r0, r0
+	div %z, %z, %z
 irq6:
-	div r0, r0, r0
+	div %z, %z, %z
 irq7:
-	div r0, r0, r0
+	div %z, %z, %z
 irq8:
-	div r0, r0, r0
+	div %z, %z, %z
 irq9:
-	div r0, r0, r0
+	div %z, %z, %z
 irq10:
-	div r0, r0, r0
+	div %z, %z, %z
 irq11:
-	div r0, r0, r0
+	div %z, %z, %z
 irq12:
-	div r0, r0, r0
+	div %z, %z, %z
 irq13:
-	div r0, r0, r0
+	div %z, %z, %z
 irq14:
-	div r0, r0, r0
+	div %z, %z, %z
 irq15:
-	div r0, r0, r0
+	div %z, %z, %z
 irq16:
-	div r0, r0, r0
+	div %z, %z, %z
 irq17:
-	div r0, r0, r0
+	div %z, %z, %z
 irq18:
-	div r0, r0, r0
+	div %z, %z, %z
 irq19:
-	div r0, r0, r0
+	div %z, %z, %z
 irq20:
-	div r0, r0, r0
+	div %z, %z, %z
 irq21:
-	div r0, r0, r0
+	div %z, %z, %z
 irq22:
-	div r0, r0, r0
+	div %z, %z, %z
 irq23:
-	div r0, r0, r0
+	div %z, %z, %z
 irq24:
-	div r0, r0, r0
+	div %z, %z, %z
 irq25:
-	div r0, r0, r0
+	div %z, %z, %z
 irq26:
-	div r0, r0, r0
+	div %z, %z, %z
 irq27:
-	div r0, r0, r0
+	div %z, %z, %z
 irq28:
-	div r0, r0, r0
+	div %z, %z, %z
 irq29:
-	div r0, r0, r0
+	div %z, %z, %z
 irq30:
-	div r0, r0, r0
+	div %z, %z, %z
 irq31:
-	div r0, r0, r0
+	div %z, %z, %z
 start:
 	b start

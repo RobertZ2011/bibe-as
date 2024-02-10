@@ -1,14 +1,15 @@
-	mov r1, 5
-	mov r9, 0
-	mov r10, 1
-	mov r8, 0
+	mov %a0, 5
+	mov %l0, 0
+	mov %l1, 0
+	mov %l2, 1
 loop:
-	cmp r8, r1
+	cmp %l0, %a0
 	b.ge end
-	add r11, r9, r10
-	mov r9, r10
-	mov r10, r11
-	add r8, r8, 1
+	add %l3, %l1, %l2
+	mov %l1, %l2
+	mov %l2, %l3
+	add %l0, %l0, 1
 	b loop
 end:
-	mov r8, r9
+	mov %o0, %l1
+	csww 76, %z
