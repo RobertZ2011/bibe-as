@@ -19,6 +19,10 @@ use bibe_asm::asm::{
 	object,
 };
 
+fn exit() {
+	std::process::exit(1);
+}
+
 fn main() {
 	let matches = Command::new("as")
 		.arg(Arg::new("input").required(true))
@@ -45,8 +49,17 @@ fn main() {
 	for input in inputs {
 		let contents = read_to_string(input).expect("Failed to read file"); 
 
-		let (_, tokens) = tokenize(&contents).unwrap();
-		let (tokens, statements) = parse(&tokens).unwrap();
+		let (remaining, tokens) = tokenize(&contents).unwrap();
+		if remaining.len() != 0 {
+			eprintln!("Unexpected input: {remaining}");
+			exit();
+		}
+
+		let (remaining, statements) = parse(&tokens).unwrap();
+		if remaining.len() != 0 {
+			eprintln!("Unexpected token: {remaining:?}");
+			exit();
+		}
 
 		let mut object = object::Object::new();
 		for statement in &statements {
@@ -56,7 +69,6 @@ fn main() {
 
 		let res = e.emit(&object);
 		if let Err(err) = res{
-			log::debug!("{:?}", tokens);
 			match err {
 				emitter::Error::UndefinedSymbol(id) => println!("Undefined symbol {}", string_table::lookup(id).unwrap()),
 			}
